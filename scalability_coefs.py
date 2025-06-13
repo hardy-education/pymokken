@@ -3,8 +3,8 @@
 Simplified standalone scalability coefficient estimation.
 
 This module provides a minimal implementation for computing item-level 
-scalability coefficients (Hi and Zi) without confidence intervals or 
-multilevel modeling. Designed for portability and simplicity.
+scalability coefficients (Hi and Zi) without standard errors, confidence intervals, or 
+multilevel modeling capabilities. Designed for portability and simplicity.
 
 Author: Michael Hardy
 """
@@ -14,12 +14,17 @@ from typing import Union, Dict
 
 def scalability_coefs(X: Union[np.ndarray, pd.DataFrame]) -> Dict:
     """
-    Compute item-level scalability coefficients (Hi and Zi) using simplified approach.
+    Compute item-level scalability coefficients (Hi and Zi) using simplified approach,
+    which does not include standard errors or confidence intervals.
     (Loevinger, 1948; Mokken, 1971; Molenaar and Sijtsma, 2000; Sijtsma and Molenaar, 2002)
 
     This function computes:
     - Hi: Item-level H coefficients (scalability of each item with rest of scale)
     - Zi: Item-level Z-scores (standardized Hi coefficients)
+    - H: Overall scale H coefficient (scalar)
+    - Z: Overall scale Z-score (scalar)
+    - Hij: Item-pair H coefficients (matrix of shape (n_items, n_items))
+    - Zij: Item-pair Z-scores (matrix of shape (n_items, n_items))
     
     Parameters
     ----------
@@ -35,6 +40,8 @@ def scalability_coefs(X: Union[np.ndarray, pd.DataFrame]) -> Dict:
         - 'Zi': Item-level Z-scores (array of length n_items)
         - 'H': Overall scale H coefficient (scalar)
         - 'Z': Overall scale Z-score (scalar)
+        - 'Hij': Item-pair H coefficients (matrix of shape (n_items, n_items))
+        - 'Zij': Item-pair Z-scores (matrix of shape (n_items, n_items))
     
     Examples
     --------
