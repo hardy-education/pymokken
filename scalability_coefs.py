@@ -93,13 +93,12 @@ def scalability_coefs(X: Union[np.ndarray, pd.DataFrame]) -> Dict:
     np.fill_diagonal(Smax_offdiag, 0)
 
     ## for future reference:
-    # Hij = np.divide(S_offdiag, Smax_offdiag, 
-    #                out=np.zeros_like(S_offdiag), where=Smax_offdiag != 0)
-    # Hi = np.sum(Hij, axis=1)
-    # H = np.sum(S_offdiag) / np.sum(Smax_offdiag)
+    Hij = np.divide(S_offdiag, Smax_offdiag, 
+                   out=np.zeros_like(S_offdiag), where=Smax_offdiag != 0)
+    Hi = np.sum(Hij, axis=1)
     
     
-    Hi = np.sum(S_offdiag, axis=1) / np.sum(Smax_offdiag, axis=1)
+    # Hi = np.sum(S_offdiag, axis=1) / np.sum(Smax_offdiag, axis=1)
     
     # Compute overall H coefficient
     H = np.sum(S_offdiag) / np.sum(Smax_offdiag)
@@ -135,6 +134,6 @@ def scalability_coefs(X: Union[np.ndarray, pd.DataFrame]) -> Dict:
         'Zi': Zi,
         'H': H,
         'Z': Z,
-        # 'Hij': Hij,  # Include for completeness
-        # 'Zij': Zij   # Include for completeness
+        'Hij': Hij,  
+        'Zij': Zij   
     }
