@@ -1,6 +1,6 @@
 """
 pytorch 2PL IRT Model Estimator
-
+by Mike Hardy
 This module provides an implementation of 2-Parameter Logistic (2PL) IRT model
 estimation using the Expectation-Maximization (EM) algorithm. 
 """
